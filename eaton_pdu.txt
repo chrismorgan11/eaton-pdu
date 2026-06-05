@@ -1,0 +1,26 @@
+
+Standard Models (Corded)
+Catalog Number 	Technology 	Form Factor 	Plug Type 	Phase 	Voltage 	Current 	Outlets 	Power Rating 	Cord Length
+EVMIL630X 	Metered 	0U (vertical) 	L6-30 	1P 	208V 	30A 	42 outlets (24)C13 (18)C39 	5.8kW 	10ft
+EVMAL630X 	Managed 	0U (vertical) 	L6-30 	1P 	208V 	30A 	42 outlets (24)C13 (18)C39 	5.8kW 	10ft
+EVMI2120X 	Metered 	0U (vertical) 	L21-20 	3P 	120/208V 	20A 	42 outlets (24)C13 (18)C39 	5.8kW 	10ft
+EVMI1530X 	Metered 	0U (vertical) 	L15-30 	3P 	208V 	30A 	42 outlets (24)C13 (18)C39 	8.6kW 	10ft
+EVMA1530X 	Managed 	0U (vertical) 	L15-30 	3P 	208V 	30A 	42 outlets (24)C13 (18)C39 	8.6kW 	10ft
+EVMI2130X 	Metered 	0U (vertical) 	L21-30 	3P 	120/208V 	30A 	42 outlets (24)C13 (18)C39 	8.6kW 	10ft
+EVMA2130X 	Managed 	0U (vertical) 	L21-30 	3P 	120/208V 	30A 	42 outlets (24)C13 (18)C39 	8.6kW 	10ft
+EVMI8365X 	Metered 	0U (vertical) 	CS8365 	3P 	208V 	50A 	42 outlets (24)C13 (18)C39 	14.4kW 	10ft
+EVMA8365X 	Managed 	0U (vertical) 	CS8365 	3P 	208V 	50A 	42 outlets (24)C13 (18)C39 	14.4kW 	10ft
+EVMI4609X-06 	Metered 	0U (vertical) 	460P9W 	3P 	208V 	60A 	42 outlets (24)C13 (18)C39 	17.3kW 	6ft
+EVMI4609X 	Metered 	0U (vertical) 	460P9W 	3P 	208V 	60A 	42 outlets (24)C13 (18)C39 	17.3kW 	10ft
+EVMA4609X-06 	Managed 	0U (vertical) 	460P9W 	3P 	208V 	60A 	42 outlets (24)C13 (18)C39 	17.3kW 	6ft
+EVMA4609X 	Managed 	0U (vertical) 	460P9W 	3P 	208V 	60A 	42 outlets (24)C13 (18)C39 	17.3kW 	10ft
+EVMIL620A 	Metered 	0U (vertical) 	C20Plug/L6-20 	1P/2P 	100-240V 	16A 	24 outlets (12)C13 (12)C39 	3.8kW 	10ft
+EVMAL620A 	Managed 	0U (vertical) 	C20Plug/L6-20 	1P/2P 	100-240V 	16A 	24 outlets (12)C13 (12)C39 	3.8kW 	10ft
+EVMAL630A 	Managed 	0U (vertical) 	L6-30 	1P 	208V 	30A 	24 outlets (12)C13 (12)C39 	5.8kW 	10ft
+EVMA2120A 	Managed 	0U (vertical) 	L21-20 	3P 	120/208V 	20A 	24 outlets (12)C13 (12)C39 	5.8kW 	10ft
+EVMAL630B 	Managed 	0U (vertical) 	L6-30 	1P 	208V 	30A 	20 outlets (10)C13 (10)C39 	5.8kW 	10ft
+EVMA2130A 	Managed 	0U (vertical) 	L21-30 	3P 	120/208V 	30A 	24 outlets (12)C13 (12)C39 	8.6kW 	10ft
+EVMA1530A 	Managed 	0U (vertical) 	L15-30 	3P 	208V 	30A 	24 outlets (12)C13 (12)C39 	8.6kW 	10ft
+EVMIG332X 	Metered 	0U (vertical) 	532P6W 	3P 	240/415V 	32A 	42 outlets (24)C13 (18)C39 	17.3kW 	10ft
+EVMAG332X 	Managed 	0U (vertical) 	532P6W 	3P 	240/415V 	32A 	42 outlets (24)C13 (18)C39 	17.3kW 	10ft
+EVMAG332C 	Managed 	0U (vertical) 	532P6W 	3P 	240/415V 	32A 	48 outlets (24)C13 (24)C39 	17.3kW 	10ft

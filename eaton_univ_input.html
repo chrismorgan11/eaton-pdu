@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eaton Universal Input PDU G4 — Input Cable Specifications</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #E31937;
+      --dark:   #1a1a1a;
+      --gray:   #4a4a4a;
+      --mid:    #6b6b6b;
+      --light:  #f4f4f4;
+      --border: #ddd;
+      --white:  #ffffff;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--gray);
+      background: var(--light);
+      line-height: 1.5;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--dark);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,.4);
+    }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-box {
+      background: var(--red);
+      color: var(--white);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 3px 11px;
+      border-radius: 3px;
+    }
+    .logo-tag { color: #bbb; font-size: 13px; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 60%, #3a0a0a 100%);
+      color: var(--white);
+      padding: 52px 40px 44px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+    .hero h1 {
+      font-size: clamp(22px, 3.5vw, 38px);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .hero h1 span { color: var(--red); }
+    .hero p {
+      color: #bbb;
+      font-size: 15px;
+      max-width: 620px;
+      margin: 0 auto 28px;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin-top: 8px;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 26px; font-weight: 700; color: var(--white); }
+    .stat-lbl { font-size: 11px; color: #aaa; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* ── CONNECTOR CALLOUT ── */
+    .callout {
+      background: var(--white);
+      border-left: 4px solid var(--red);
+      padding: 14px 20px;
+      margin: 0 40px;
+      font-size: 13.5px;
+      color: var(--mid);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .callout-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .callout strong { color: var(--dark); }
+
+    /* ── FILTERS ── */
+    .controls {
+      background: var(--white);
+      padding: 18px 40px;
+      border-bottom: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+    .controls label { font-size: 12px; font-weight: 600; color: var(--mid); text-transform: uppercase; letter-spacing: 0.5px; }
+    select, input[type="text"] {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 7px 12px;
+      font-size: 13px;
+      color: var(--gray);
+      background: var(--white);
+      outline: none;
+    }
+    select:focus, input[type="text"]:focus { border-color: var(--red); }
+    .controls-sep { width: 1px; height: 28px; background: var(--border); }
+    .result-count {
+      margin-left: auto;
+      font-size: 13px;
+      color: var(--mid);
+      white-space: nowrap;
+    }
+    .result-count span { font-weight: 700; color: var(--dark); }
+
+    /* ── TABLE ── */
+    .table-section { padding: 24px 40px 48px; }
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      min-width: 1000px;
+    }
+    thead { background: var(--dark); color: var(--white); }
+    thead th {
+      padding: 13px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11.5px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
+    thead th:hover { background: #2d2d2d; }
+    thead th .sort-icon { margin-left: 4px; opacity: .4; font-size: 10px; }
+    thead th.asc  .sort-icon::after { content: "▲"; opacity: 1; }
+    thead th.desc .sort-icon::after { content: "▼"; opacity: 1; }
+    thead th:not(.asc):not(.desc) .sort-icon::after { content: "⇅"; }
+    thead th.nosort { cursor: default; }
+    thead th.nosort:hover { background: var(--dark); }
+
+    tbody tr:nth-child(even) { background: #fafafa; }
+    tbody tr:hover { background: #fff5f6; }
+    tbody td {
+      padding: 11px 14px;
+      border-bottom: 1px solid #eee;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+
+    /* Catalog link */
+    a.catalog-link {
+      color: var(--red);
+      text-decoration: none;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    a.catalog-link:hover { text-decoration: underline; }
+
+    /* Plug image links */
+    a.plug-link { color: inherit; text-decoration: none; white-space: nowrap; }
+    a.plug-link:hover { color: var(--red); }
+    .plug-link-icon { font-size: 10px; opacity: .4; vertical-align: super; margin-left: 2px; }
+    a.plug-link:hover .plug-link-icon { opacity: 1; }
+
+    /* Phase badges */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+    .badge-1p      { background: #e3f2fd; color: #1565c0; }
+    .badge-3p  { background: #ede7f6; color: #4527a0; }
+    
+
+    /* Standard tag */
+    .std-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .std-nema { background: #e8f5e9; color: #2e7d32; }
+    .std-iec  { background: #e3f2fd; color: #1565c0; }
+    .std-hw   { background: #f5f5f5; color: #616161; }
+    .std-cs   { background: #fff8e1; color: #f57f17; }
+
+    /* Power pill */
+    .power-pill {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #f0f0f0;
+      color: var(--dark);
+    }
+
+    /* No results */
+    .no-results {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--mid);
+      font-size: 15px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: #888;
+      text-align: center;
+      padding: 24px 40px;
+      font-size: 12px;
+    }
+    footer a { color: #aaa; text-decoration: none; }
+    footer a:hover { color: var(--white); }
+
+    @media (max-width: 600px) {
+      header, .controls, .table-section, .callout { padding-left: 16px; padding-right: 16px; }
+      .hero { padding: 40px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">
+    <span class="logo-box">EATON</span>
+    <span class="logo-tag">Universal Input Rack PDU G4</span>
+  </a>
+  <span style="color:#aaa;font-size:12px;">Input Cable Specifications</span>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Eaton Rack PDU G4 — Universal Input (UPDU)</p>
+  <h1>Input <span>Cable Specifications</span></h1>
+  <p>Detachable, interchangeable input cables sold separately. Each cable features an 8-pin Souriau UTG connector on the PDU side and your choice of plug on the power source side.</p>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-num">12</div><div class="stat-lbl">Cable SKUs</div></div>
+    <div class="stat"><div class="stat-num">5–23</div><div class="stat-lbl">kVA Range</div></div>
+    <div class="stat"><div class="stat-num">10</div><div class="stat-lbl">Plug Types</div></div>
+    <div class="stat"><div class="stat-num">6 / 10</div><div class="stat-lbl">ft Lengths</div></div>
+  </div>
+</div>
+
+<!-- CALLOUT -->
+<div class="callout" style="margin-top:16px;">
+  <span class="callout-icon">🔌</span>
+  <div>
+    <strong>Souriau UTG 8-Pin Connector</strong> — All cables use a locking bayonet UTG series connector (PDU side) originally designed for military and aerospace applications. A ⅓-turn locks with an audible click. The cable you select determines the PDU's power rating; cables are hot-swappable on supported models.
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="controls">
+  <label for="filter-phase">Phase</label>
+  <select id="filter-phase">
+    <option value="">All</option>
+    <option value="1-Phase">1-Phase</option>
+    <option value="3-Phase">3-Phase</option>    
+  </select>
+
+  <div class="controls-sep"></div>
+
+  <label for="filter-std">Standard</label>
+  <select id="filter-std">
+    <option value="">All</option>
+    <option value="NEMA">NEMA</option>
+    <option value="IEC">IEC 60309</option>
+    <option value="CS">California Std</option>
+    <option value="Hardwire">Hardwire</option>
+  </select>
+
+  <div class="controls-sep"></div>
+
+  <label for="filter-length">Length</label>
+  <select id="filter-length">
+    <option value="">All</option>
+    <option value="6 ft">6 ft</option>
+    <option value="10 ft">10 ft</option>
+  </select>
+
+  <div class="controls-sep"></div>
+
+  <label for="search">Search</label>
+  <input id="search" type="text" placeholder="Catalog #, plug type…" style="width:180px;" />
+
+  <div class="result-count"><span id="count">12</span> of 12 cables</div>
+</div>
+
+<!-- TABLE -->
+<div class="table-section">
+  <div class="table-wrap">
+    <table id="cable-table">
+      <thead>
+        <tr>
+          <th data-col="0">Catalog #<span class="sort-icon"></span></th>
+          <th data-col="1">Plug Type<span class="sort-icon"></span></th>
+          <th class="nosort">Standard</th>
+          <th data-col="2">Phase<span class="sort-icon"></span></th>
+          <th data-col="3">Voltage<span class="sort-icon"></span></th>
+          <th data-col="4">Max Current<span class="sort-icon"></span></th>
+          <th data-col="5">Power Rating<span class="sort-icon"></span></th>
+          <th data-col="6">Length<span class="sort-icon"></span></th>
+          <th data-col="7">AWG<span class="sort-icon"></span></th>
+          <th data-col="8">Conductors<span class="sort-icon"></span></th>
+          <th class="nosort">Certifications</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Source: <a href="https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/power-distribution-for-it-equipment/eaton-rack-pdu-g4.html" target="_blank">eaton.com — Eaton Rack PDU G4</a> &nbsp;|&nbsp; Cable specs from <a href="https://tripplite.eaton.com" target="_blank">tripplite.eaton.com</a></p>
+  <p style="margin-top:6px;">© Eaton Corporation. All product names and trademarks are the property of their respective owners.</p>
+</footer>
+
+<script>
+  // ── DATA ──────────────────────────────────────────────────────────────────
+  // [catalog, plug_type, phase, voltage, current, power_kva, length, awg, conductors, std_key]
+  const cables = [
+    ["CBL350-10", "NEMA L6-30P",  "1-Phase",       "200–240V",            "30A",    "5.0 kVA",        "10 ft", "10", "3", "NEMA"],
+    ["CBL351-10", "NEMA L21-30P", "3-Phase",   "208V",            "30A",    "8.6 kVA",        "10 ft", "10", "4", "NEMA"],
+    ["CBL354-10", "IEC 332P6W",   "1-Phase",       "230–240V",            "30A", "5.8 kVA",  "10 ft", "9",  "3", "IEC"],
+    ["CBL355-10", "IEC 516P6W",   "3-Phase",   "230/400 – 240/415V",  "20A",    "11.5 kVA","10 ft", "11", "5", "IEC"],
+    ["CBL356-06", "IEC 460P9W",   "3-Phase", "208V",                "60A",    "17.3 kVA",       "6 ft",  "6",  "4", "IEC"],
+    ["CBL356-10", "IEC 460P9W",   "3-Phase", "208V",                "60A",    "17.3 kVA",       "10 ft", "6",  "4", "IEC"],
+    ["CBL357-10", "Hardwire",     "3-Phase", "208V",                "70A",    "17.3 kVA",       "10 ft", "6",  "4", "Hardwire"],
+    ["CBL358-10", "IEC 532P6W",   "3-Phase",   "230/400 – 240/415V",  "30", "17.3 kVA","10 ft", "9",  "5", "IEC"],
+    ["CBL360-10", "IEC 560P6W",   "3-Phase",   "240/415V",            "32A",    "23.0 kVA",       "10 ft", "8",  "5", "IEC"],
+    ["CBL362-10", "IEC 360P6W",   "1-Phase",       "200–240V",            "60A",    "23.0 kVA",       "10 ft", "6",  "3", "IEC"],
+    ["CBL364-10", "CS8365",       "3-Phase Delta", "208V",                "50A",    "14.4 kVA",       "10 ft", "6",  "4", "CS"],
+    ["CBL365-10", "NEMA L15-30P", "3-Phase Delta", "208V",                "30A",    "8.6 kVA",        "10 ft", "10", "4", "NEMA"],
+  ];
+
+  const TOTAL = cables.length;
+  let sortCol = -1, sortAsc = true;
+
+  // ── PLUG IMAGES ───────────────────────────────────────────────────────────
+  const PLUG_IMG = {
+    'NEMA L6-30P':  'https://static.stayonline.com/images/ReferencePages/nema_l6-30p.gif',
+    'NEMA L21-30P': 'https://static.stayonline.com/images/ReferencePages/nema_l21-30p.gif',
+    'NEMA L15-30P': 'https://static.stayonline.com/images/ReferencePages/nema_l15-30p.gif',
+    'CS8365':       'https://static.stayonline.com/images/ReferencePages/CS8365C.gif',
+    'IEC 460P9W':   'https://static.stayonline.com/images/ReferencePages/460c9.gif',
+    'IEC 332P6W':   'https://static.stayonline.com/images/ReferencePages/330c6.gif',
+    'IEC 360P6W':   'https://static.stayonline.com/images/ReferencePages/360c6.gif',
+    'IEC 516P6W':   'https://static.stayonline.com/images/ReferencePages/516c6.gif',
+    'IEC 532P6W':   'https://static.stayonline.com/images/ReferencePages/516c6.gif',
+    'IEC 560P6W':   'https://static.stayonline.com/images/ReferencePages/360c6.gif',
+  };
+
+  // ── RENDER HELPERS ────────────────────────────────────────────────────────
+  function catalogLink(num) {
+    const url = `https://www.eaton.com/us/en-us/skuPage.${num}.html`;
+    return `<a class="catalog-link" href="${url}" target="_blank" rel="noopener">${num}</a>`;
+  }
+
+  function plugWithImg(label) {
+    const url = PLUG_IMG[label];
+    if (!url) return label;
+    return `<a class="plug-link" href="${url}" target="_blank" rel="noopener" title="View connector diagram">${label}<span class="plug-link-icon">↗</span></a>`;
+  }
+
+  function phaseBadge(p) {
+    const map = {
+      '1-Phase':       ['badge-1p',     '1-Phase'],
+      '3-Phase WYE':   ['badge-3p-wye', '3Ø WYE'],
+      '3-Phase Delta': ['badge-3p-dlt', '3Ø Delta'],
+    };
+    const [cls, lbl] = map[p] || ['badge-1p', p];
+    return `<span class="badge ${cls}">${lbl}</span>`;
+  }
+
+  function stdTag(key) {
+    const map = {
+      'NEMA':     ['std-nema', 'NEMA'],
+      'IEC':      ['std-iec',  'IEC 60309'],
+      'CS':       ['std-cs',   'CA Std'],
+      'Hardwire': ['std-hw',   'Hardwire'],
+    };
+    const [cls, lbl] = map[key] || ['std-hw', key];
+    return `<span class="std-tag ${cls}">${lbl}</span>`;
+  }
+
+  function powerPill(p) {
+    return `<span class="power-pill">${p}</span>`;
+  }
+
+  // ── RENDER ────────────────────────────────────────────────────────────────
+  function renderRows(data) {
+    const tbody = document.getElementById("table-body");
+    if (!data.length) {
+      tbody.innerHTML = `<tr><td colspan="11" class="no-results">No cables match the selected filters.</td></tr>`;
+      document.getElementById("count").textContent = 0;
+      return;
+    }
+    tbody.innerHTML = data.map(r => `
+      <tr>
+        <td>${catalogLink(r[0])}</td>
+        <td>${plugWithImg(r[1])}</td>
+        <td>${stdTag(r[9])}</td>
+        <td>${phaseBadge(r[2])}</td>
+        <td>${r[3]}</td>
+        <td>${r[4]}</td>
+        <td>${powerPill(r[5])}</td>
+        <td>${r[6]}</td>
+        <td>${r[7]} AWG</td>
+        <td>${r[8]}</td>
+        <td style="font-size:12px;color:var(--mid);">UL / cTUVus / CE / RoHS</td>
+      </tr>`).join("");
+    document.getElementById("count").textContent = data.length;
+  }
+
+  // ── FILTER ────────────────────────────────────────────────────────────────
+  function getFiltered() {
+    const phase  = document.getElementById("filter-phase").value;
+    const std    = document.getElementById("filter-std").value;
+    const length = document.getElementById("filter-length").value;
+    const search = document.getElementById("search").value.trim().toLowerCase();
+
+    return cables.filter(r => {
+      if (phase  && r[2] !== phase)  return false;
+      if (std    && r[9] !== std)    return false;
+      if (length && r[6] !== length) return false;
+      if (search && !r.slice(0,9).join(" ").toLowerCase().includes(search)) return false;
+      return true;
+    });
+  }
+
+  // ── SORT ──────────────────────────────────────────────────────────────────
+  function getSorted(data) {
+    if (sortCol < 0) return data;
+    return [...data].sort((a, b) => {
+      const va = a[sortCol], vb = b[sortCol];
+      // numeric sort: AWG (7), Conductors (8), Current (4 — strip non-numeric), Power (5)
+      if (sortCol === 7 || sortCol === 8) {
+        return (parseFloat(va) - parseFloat(vb)) * (sortAsc ? 1 : -1);
+      }
+      if (sortCol === 4) {
+        return (parseFloat(va) - parseFloat(vb)) * (sortAsc ? 1 : -1);
+      }
+      if (sortCol === 5) {
+        return (parseFloat(va) - parseFloat(vb)) * (sortAsc ? 1 : -1);
+      }
+      return va.localeCompare(vb) * (sortAsc ? 1 : -1);
+    });
+  }
+
+  function update() { renderRows(getSorted(getFiltered())); }
+
+  // ── EVENTS ────────────────────────────────────────────────────────────────
+  ["filter-phase","filter-std","filter-length","search"].forEach(id =>
+    document.getElementById(id).addEventListener("input", update));
+
+  document.querySelectorAll("thead th[data-col]").forEach(th => {
+    th.addEventListener("click", () => {
+      const col = +th.dataset.col;
+      if (sortCol === col) { sortAsc = !sortAsc; }
+      else { sortCol = col; sortAsc = true; }
+      document.querySelectorAll("thead th").forEach(h => h.classList.remove("asc","desc"));
+      th.classList.add(sortAsc ? "asc" : "desc");
+      update();
+    });
+  });
+
+  update();
+</script>
+</body>
+</html>

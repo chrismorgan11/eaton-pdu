@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eaton Rack PDU G4 — Explorer Standard G4 Models</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:      #E31937;
+      --dark:     #1a1a1a;
+      --gray:     #4a4a4a;
+      --mid:      #6b6b6b;
+      --light:    #f4f4f4;
+      --border:   #ddd;
+      --white:    #ffffff;
+      --accent:   #c0102a;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--gray);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--dark);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,.4);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-box {
+      background: var(--red);
+      color: var(--white);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 4px 12px;
+      border-radius: 3px;
+    }
+    .logo-tag {
+      color: #ccc;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+    .header-link {
+      color: #ccc;
+      font-size: 13px;
+      text-decoration: none;
+    }
+    .header-link:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 60%, #3a0a0a 100%);
+      color: var(--white);
+      padding: 72px 40px 64px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .hero h1 span { color: var(--red); }
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto 32px;
+      font-size: 16px;
+      color: #ccc;
+    }
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .badge {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.18);
+      color: #ddd;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 64px 40px; }
+    section:nth-child(odd) { background: var(--white); }
+    section:nth-child(even) { background: var(--light); }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      max-width: 680px;
+      font-size: 15px;
+      color: var(--mid);
+      margin-bottom: 48px;
+    }
+
+    /* ── TIER CARDS ── */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .tier-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--red);
+      border-radius: 6px;
+      padding: 28px 24px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .tier-card:hover {
+      box-shadow: 0 8px 28px rgba(0,0,0,.12);
+      transform: translateY(-3px);
+    }
+    .tier-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #fbe8eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+    .tier-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .tier-card p {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+    .tier-features {
+      list-style: none;
+      font-size: 13px;
+      color: var(--gray);
+    }
+    .tier-features li {
+      padding: 4px 0;
+      padding-left: 18px;
+      position: relative;
+    }
+    .tier-features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    /* ── MODEL TABLE ── */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      min-width: 800px;
+    }
+    thead {
+      background: var(--dark);
+      color: var(--white);
+    }
+    thead th {
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    thead th:first-child { border-radius: 5px 0 0 0; }
+    thead th:last-child  { border-radius: 0 5px 0 0; }
+    tbody tr:nth-child(even) { background: #fafafa; }
+    tbody tr:hover { background: #fff0f2; }
+    tbody td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--gray);
+      vertical-align: top;
+    }
+    tbody td:first-child {
+      font-weight: 600;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+    .tier-tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .tag-basic    { background: #e8f5e9; color: #2e7d32; }
+    .tag-metered  { background: #e3f2fd; color: #1565c0; }
+    .tag-switched { background: #fff3e0; color: #e65100; }
+    .tag-managed  { background: #fce4ec; color: #880e4f; }
+
+    /* ── FEATURE BLOCKS ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .feature-block {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .feature-icon-wrap {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: #fbe8eb;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+    .feature-block h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .feature-block p {
+      font-size: 13.5px;
+      color: var(--mid);
+      line-height: 1.5;
+    }
+
+    /* ── SPEC TABLE ── */
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .spec-table {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .spec-table-title {
+      background: var(--red);
+      color: var(--white);
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .spec-row {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      font-size: 13.5px;
+    }
+    .spec-row:last-child { border-bottom: none; }
+    .spec-key {
+      width: 45%;
+      padding: 10px 14px;
+      background: #fafafa;
+      font-weight: 600;
+      color: var(--dark);
+      border-right: 1px solid var(--border);
+    }
+    .spec-val {
+      padding: 10px 14px;
+      color: var(--gray);
+    }
+
+    /* ── SECURITY BANNER ── */
+    .security-banner {
+      background: linear-gradient(135deg, #1a1a1a, #2a0a10);
+      color: var(--white);
+      padding: 56px 40px;
+      text-align: center;
+    }
+    .security-banner h2 {
+      font-size: clamp(20px, 2.5vw, 30px);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .security-banner p {
+      color: #ccc;
+      font-size: 15px;
+      max-width: 640px;
+      margin: 0 auto 28px;
+    }
+    .cert-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .cert-pill {
+      background: var(--red);
+      color: var(--white);
+      padding: 8px 20px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: #888;
+      text-align: center;
+      padding: 28px 40px;
+      font-size: 12.5px;
+    }
+    footer a { color: #aaa; text-decoration: none; }
+    footer a:hover { color: var(--white); }
+
+    @media (max-width: 600px) {
+      section { padding: 48px 20px; }
+      header  { padding: 0 20px; }
+      .hero   { padding: 48px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">
+    <span class="logo-box">EATON</span>
+    <span class="logo-tag">Power Distribution</span>
+  </a>
+  <span class="header-link">Rack PDU G4 Series</span>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Eaton Rack PDU G4 Series</p>
+  <h1>Explorer Standard <span>G4 Models</span></h1>
+  <p>Optimize power management. Maximize cybersecurity. Industry-leading power distribution designed for today's most demanding data center environments.</p>
+  <div class="badge-row">
+    <span class="badge">3 kW – 23 kW</span>
+    <span class="badge">Single &amp; Three Phase</span>
+    <span class="badge">Up to 54 Outlets</span>
+    <span class="badge">0U Vertical Mount</span>
+    <span class="badge">UL 2900-1 Certified</span>
+    <span class="badge">IEC 62443-4-2 Certified</span>
+  </div>
+</div>
+
+<!-- TIER OVERVIEW -->
+<section>
+  <div style="max-width:1100px;margin:0 auto;">
+    <p class="section-label">Model Tiers</p>
+    <h2 class="section-title">Four Configurations to Match Every Need</h2>
+    <p class="section-sub">Explorer Standard G4 Models are available in four power management tiers, from straightforward power delivery to full outlet-level monitoring and control.</p>
+    <div class="tier-grid">
+
+      <div class="tier-card">
+        <div class="tier-icon">⚡</div>
+        <h3>Basic G4</h3>
+        <p>Cost-effective, reliable power distribution with a secure built-in high-retention system to firmly hold standard power cables. No network interface required.</p>
+        <ul class="tier-features">
+          <li>Reliable power delivery</li>
+          <li>High-retention outlet system</li>
+          <li>P-lock compatible C39 outlets</li>
+          <li>LSZH halogen-free cable</li>
+          <li>Toolless mounting buttons</li>
+        </ul>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-icon">📊</div>
+        <h3>Metered Input G4</h3>
+        <p>Streamlines power management by simplifying load balancing and preventing overloads through network-level input monitoring and remote visibility.</p>
+        <ul class="tier-features">
+          <li>All Basic G4 features</li>
+          <li>Input-level power metering</li>
+          <li>Remote &amp; on-site monitoring</li>
+          <li>Load balancing support</li>
+          <li>Overload prevention</li>
+          <li>Gigabit Network Module (GNM)</li>
+        </ul>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-icon">🔀</div>
+        <h3>Switched (Metered Outlet) G4</h3>
+        <p>Combines advanced outlet-level control with all power quality measurement capabilities of the Metered Input PDU, enabling remote power cycling per outlet.</p>
+        <ul class="tier-features">
+          <li>All Metered Input features</li>
+          <li>Outlet-level monitoring</li>
+          <li>Remote outlet switching</li>
+          <li>Per-outlet power cycling</li>
+          <li>Color-coded outlet sections</li>
+          <li>Cascade up to 40 PDUs</li>
+        </ul>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-icon">🛡️</div>
+        <h3>Managed G4</h3>
+        <p>The most capable tier. Actively monitors and measures voltage, current, and power consumption at the outlet level with full cybersecurity certification.</p>
+        <ul class="tier-features">
+          <li>All Switched G4 features</li>
+          <li>Outlet-level V, A, W measurement</li>
+          <li>Zero-trust architecture</li>
+          <li>Zero-touch provisioning</li>
+          <li>Hot-swappable GNM</li>
+          <li>Dual GbE ports</li>
+          <li>Individual IP per cascaded PDU</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MODEL TABLE -->
+<section>
+  <div style="max-width:1100px;margin:0 auto;">
+    <p class="section-label">Model Numbers</p>
+    <h2 class="section-title">Explorer Standard G4 — Available Models</h2>
+    <p class="section-sub">Representative SKUs from the Explorer Standard G4 lineup. Models are available in 1-phase and 3-phase configurations with 16A and 32A input ratings.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Part Number</th>
+            <th>Tier</th>
+            <th>Phase</th>
+            <th>Input</th>
+            <th>Amps</th>
+            <th>Voltage</th>
+            <th>Power</th>
+            <th>Outlets</th>
+            <th>Form Factor</th>
+            <th>Cord</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EVBAF116A</td>
+            <td><span class="tier-tag tag-basic">Basic</span></td>
+            <td>1-Phase</td>
+            <td>IEC-60309</td>
+            <td>16A</td>
+            <td>200–240V</td>
+            <td>3.7 kW</td>
+            <td>24 [(12) C13, (12) C39]</td>
+            <td>0U / 22.5U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVBAF132A</td>
+            <td><span class="tier-tag tag-basic">Basic</span></td>
+            <td>1-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>7.4 kW</td>
+            <td>24 [(12) C13, (12) C39]</td>
+            <td>0U / 22.5U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVBAF132X</td>
+            <td><span class="tier-tag tag-basic">Basic</span></td>
+            <td>1-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>7.4 kW</td>
+            <td>42 [(24) C13, (18) C39]</td>
+            <td>0U / 39U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVBAF332X</td>
+            <td><span class="tier-tag tag-basic">Basic</span></td>
+            <td>3-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>22 kW</td>
+            <td>48 [(24) C13, (24) C39]</td>
+            <td>0U / 39U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVMIF116A</td>
+            <td><span class="tier-tag tag-metered">Metered Input</span></td>
+            <td>1-Phase</td>
+            <td>IEC-60309</td>
+            <td>16A</td>
+            <td>200–240V</td>
+            <td>3.7 kW</td>
+            <td>24 [(12) C13, (12) C39]</td>
+            <td>0U / 22.5U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVMIF132A</td>
+            <td><span class="tier-tag tag-metered">Metered Input</span></td>
+            <td>1-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>7.4 kW</td>
+            <td>24 [(12) C13, (12) C39]</td>
+            <td>0U / 22.5U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVMIF132X</td>
+            <td><span class="tier-tag tag-metered">Metered Input</span></td>
+            <td>1-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>7.4 kW</td>
+            <td>42 [(24) C13, (18) C39]</td>
+            <td>0U / 39U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVMIF316A</td>
+            <td><span class="tier-tag tag-metered">Metered Input</span></td>
+            <td>3-Phase</td>
+            <td>IEC-60309</td>
+            <td>16A</td>
+            <td>200–240V</td>
+            <td>11 kW</td>
+            <td>48 [(24) C13, (24) C39]</td>
+            <td>0U / 39U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVMIF332X</td>
+            <td><span class="tier-tag tag-metered">Metered Input</span></td>
+            <td>3-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>22 kW</td>
+            <td>48 [(24) C13, (24) C39]</td>
+            <td>0U / 39U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVSIF132A</td>
+            <td><span class="tier-tag tag-switched">Switched</span></td>
+            <td>1-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>7.4 kW</td>
+            <td>24 [(12) C13, (12) C39]</td>
+            <td>0U / 22.5U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVSIF132X</td>
+            <td><span class="tier-tag tag-switched">Switched</span></td>
+            <td>1-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>7.4 kW</td>
+            <td>42 [(24) C13, (18) C39]</td>
+            <td>0U / 39U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVSIF332X</td>
+            <td><span class="tier-tag tag-switched">Switched</span></td>
+            <td>3-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>22 kW</td>
+            <td>48 [(24) C13, (24) C39]</td>
+            <td>0U / 39U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVMAF116A</td>
+            <td><span class="tier-tag tag-managed">Managed</span></td>
+            <td>1-Phase</td>
+            <td>IEC-60309</td>
+            <td>16A</td>
+            <td>200–240V</td>
+            <td>3.7 kW</td>
+            <td>24 [(12) C13, (12) C39]</td>
+            <td>0U / 22.5U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVMAF132A</td>
+            <td><span class="tier-tag tag-managed">Managed</span></td>
+            <td>1-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>7.4 kW</td>
+            <td>24 [(12) C13, (12) C39]</td>
+            <td>0U / 39U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVMAF132X</td>
+            <td><span class="tier-tag tag-managed">Managed</span></td>
+            <td>1-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>7.4 kW</td>
+            <td>42 [(24) C13, (18) C39]</td>
+            <td>0U / 39U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVMAF316A</td>
+            <td><span class="tier-tag tag-managed">Managed</span></td>
+            <td>3-Phase</td>
+            <td>IEC-60309</td>
+            <td>16A</td>
+            <td>200–240V</td>
+            <td>11 kW</td>
+            <td>48 [(24) C13, (24) C39]</td>
+            <td>0U / 39U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVMAF332A</td>
+            <td><span class="tier-tag tag-managed">Managed</span></td>
+            <td>3-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>22 kW</td>
+            <td>48 [(24) C13, (24) C39]</td>
+            <td>0U / 39U</td>
+            <td>3m</td>
+          </tr>
+          <tr>
+            <td>EVMAF332X</td>
+            <td><span class="tier-tag tag-managed">Managed</span></td>
+            <td>3-Phase</td>
+            <td>IEC-60309</td>
+            <td>32A</td>
+            <td>200–240V</td>
+            <td>22 kW</td>
+            <td>48 [(24) C13, (24) C39]</td>
+            <td>0U / 39U</td>
+            <td>3m</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- KEY FEATURES -->
+<section>
+  <div style="max-width:1100px;margin:0 auto;">
+    <p class="section-label">Key Features</p>
+    <h2 class="section-title">What Sets the G4 Apart</h2>
+    <p class="section-sub">Every Explorer Standard G4 Model is built around a set of innovations that simplify deployment, improve reliability, and future-proof your data center investment.</p>
+    <div class="feature-grid">
+
+      <div class="feature-block">
+        <div class="feature-icon-wrap">🔌</div>
+        <div>
+          <h4>C39 Universal Outlet</h4>
+          <p>The revolutionary single C39 outlet accepts both C13 (10A) and C19 (16A) plugs. P-lock compatible for a firm, secure connection — no adapter needed.</p>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-icon-wrap">🔁</div>
+        <div>
+          <h4>Hot-Swappable Network Module</h4>
+          <p>The Gigabit Network Module (GNM) can be removed or upgraded without interrupting power to the PDU, eliminating maintenance windows for firmware upgrades.</p>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-icon-wrap">🔗</div>
+        <div>
+          <h4>Network Cascading</h4>
+          <p>Dual GbE ports let you cascade up to 40 PDUs sharing a single network connection, each with its own individual IP address, dramatically reducing IP consumption.</p>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-icon-wrap">🎨</div>
+        <div>
+          <h4>Color-Coded Outlet Sections</h4>
+          <p>Visually distinct outlet groups make cable management and phase identification fast and intuitive, reducing human error during installation and maintenance.</p>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-icon-wrap">🔧</div>
+        <div>
+          <h4>Toolless Mounting</h4>
+          <p>Toolless mounting buttons provide multiple mounting options to fit your rack layout and power needs without requiring extra hardware or specialized tools.</p>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-icon-wrap">🌿</div>
+        <div>
+          <h4>LSZH Cable (Halogen-Free)</h4>
+          <p>Low Smoke Zero Halogen (LSZH) cables come as standard, reducing toxic gas emission in the event of fire — critical for dense, enclosed data center environments.</p>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-icon-wrap">🌡️</div>
+        <div>
+          <h4>High-Temp Operation</h4>
+          <p>Rated for high-temperature environments to support modern, energy-efficient data center designs that operate at elevated inlet temperatures.</p>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-icon-wrap">📡</div>
+        <div>
+          <h4>Zero-Touch Provisioning</h4>
+          <p>Managed models support zero-touch provisioning via the integrated GNM, enabling rapid, automated deployment across large-scale data center rollouts.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TECHNICAL SPECIFICATIONS -->
+<section>
+  <div style="max-width:1100px;margin:0 auto;">
+    <p class="section-label">Technical Specifications</p>
+    <h2 class="section-title">General Specifications</h2>
+    <p class="section-sub">Core technical parameters for the Explorer Standard G4 line.</p>
+    <div class="spec-grid">
+
+      <div class="spec-table">
+        <div class="spec-table-title">Power Ratings</div>
+        <div class="spec-row"><span class="spec-key">Min. Power</span><span class="spec-val">3 kW</span></div>
+        <div class="spec-row"><span class="spec-key">Max. Power</span><span class="spec-val">23 kW</span></div>
+        <div class="spec-row"><span class="spec-key">Phase Options</span><span class="spec-val">Single-phase, Three-phase</span></div>
+        <div class="spec-row"><span class="spec-key">Input Current</span><span class="spec-val">16A, 32A</span></div>
+        <div class="spec-row"><span class="spec-key">Input Voltage</span><span class="spec-val">200–240V</span></div>
+        <div class="spec-row"><span class="spec-key">Input Plug</span><span class="spec-val">IEC-60309 (hardwired, 3m cord)</span></div>
+      </div>
+
+      <div class="spec-table">
+        <div class="spec-table-title">Outlets</div>
+        <div class="spec-row"><span class="spec-key">Outlet Types</span><span class="spec-val">C13, C19, C39 (universal)</span></div>
+        <div class="spec-row"><span class="spec-key">Min. Outlets</span><span class="spec-val">8 (entry models)</span></div>
+        <div class="spec-row"><span class="spec-key">Max. Outlets</span><span class="spec-val">54</span></div>
+        <div class="spec-row"><span class="spec-key">Typical Configs</span><span class="spec-val">24, 42, or 48 outlets</span></div>
+        <div class="spec-row"><span class="spec-key">C39 Compat.</span><span class="spec-val">Accepts C14 and C20 plugs</span></div>
+        <div class="spec-row"><span class="spec-key">Retention</span><span class="spec-val">P-lock high-retention system</span></div>
+      </div>
+
+      <div class="spec-table">
+        <div class="spec-table-title">Physical</div>
+        <div class="spec-row"><span class="spec-key">Form Factor</span><span class="spec-val">0U Vertical (Zero-U)</span></div>
+        <div class="spec-row"><span class="spec-key">Chassis Height</span><span class="spec-val">22.5U or 39U</span></div>
+        <div class="spec-row"><span class="spec-key">Dimensions (39U)</span><span class="spec-val">1730 × 52 × 53 mm</span></div>
+        <div class="spec-row"><span class="spec-key">Mounting</span><span class="spec-val">Toolless, multi-option buttons</span></div>
+        <div class="spec-row"><span class="spec-key">Cable Type</span><span class="spec-val">LSZH (halogen-free)</span></div>
+        <div class="spec-row"><span class="spec-key">Cord Length</span><span class="spec-val">3m standard</span></div>
+      </div>
+
+      <div class="spec-table">
+        <div class="spec-table-title">Networking (Metered / Managed)</div>
+        <div class="spec-row"><span class="spec-key">Network Module</span><span class="spec-val">Gigabit Network Module (GNM)</span></div>
+        <div class="spec-row"><span class="spec-key">GNM Ports</span><span class="spec-val">Dual GbE (cascade)</span></div>
+        <div class="spec-row"><span class="spec-key">Max. Cascade</span><span class="spec-val">Up to 40 PDUs</span></div>
+        <div class="spec-row"><span class="spec-key">IP Addressing</span><span class="spec-val">Individual IP per PDU</span></div>
+        <div class="spec-row"><span class="spec-key">GNM Swap</span><span class="spec-val">Hot-swappable (no power loss)</span></div>
+        <div class="spec-row"><span class="spec-key">Provisioning</span><span class="spec-val">Zero-touch provisioning</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY BANNER -->
+<div class="security-banner">
+  <h2>Industry-Leading Cybersecurity</h2>
+  <p>Managed, Metered Input, and Metered Outlet models are the only PDUs on the market with dual cybersecurity certifications — built on a zero-trust architecture from the ground up.</p>
+  <div class="cert-row">
+    <span class="cert-pill">UL 2900-1 Certified</span>
+    <span class="cert-pill">IEC 62443-4-2 Certified</span>
+    <span class="cert-pill">Zero-Trust Architecture</span>
+    <span class="cert-pill">Zero-Touch Provisioning</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Data sourced from <a href="https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/power-distribution-for-it-equipment/eaton-rack-pdu-g4.html" target="_blank">eaton.com — Eaton Rack PDU G4</a> &nbsp;|&nbsp; For official specifications, visit <a href="https://www.eaton.com" target="_blank">eaton.com</a></p>
+  <p style="margin-top:8px;">© Eaton Corporation. All product names and trademarks are the property of their respective owners.</p>
+</footer>
+
+</body>
+</html>
