@@ -370,10 +370,34 @@
     footer a { color: #aaa; text-decoration: none; }
     footer a:hover { color: var(--white); }
 
+    /* ── SITE NAV ── */
+    .site-nav {
+      background: #252525;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 40px;
+      border-bottom: 2px solid var(--red);
+    }
+    .site-nav a {
+      color: #aaa;
+      text-decoration: none;
+      padding: 10px 16px;
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color .15s, background .15s;
+    }
+    .site-nav a:hover { color: var(--white); background: rgba(255,255,255,.05); }
+    .site-nav a.active { color: var(--white); border-bottom-color: var(--red); }
+
     @media (max-width: 600px) {
       section { padding: 48px 20px; }
       header  { padding: 0 20px; }
       .hero   { padding: 48px 20px; }
+      .site-nav { padding: 0 16px; }
     }
   </style>
 </head>
@@ -387,6 +411,16 @@
   </a>
   <span class="header-link">Rack PDU G4 Series</span>
 </header>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="eaton-rack-pdu-g4.html">Explorer G4 Models</a>
+  <a href="eaton_pdu.html">Standard Models</a>
+  <a href="eaton_pdu_image.html">Standard Models + Images</a>
+  <a href="eaton_pdu_image - Copy.html">Standard Copy</a>
+  <a href="eaton_univ_input.html">Universal Input Cables</a>
+</nav>
+<script>document.querySelectorAll('.site-nav a').forEach(a=>{if(location.href.includes(a.getAttribute('href')))a.classList.add('active');});</script>
 
 <!-- HERO -->
 <div class="hero">

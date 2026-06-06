@@ -252,9 +252,33 @@
     footer a { color: #aaa; text-decoration: none; }
     footer a:hover { color: var(--white); }
 
+    /* ── SITE NAV ── */
+    .site-nav {
+      background: #252525;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 40px;
+      border-bottom: 2px solid var(--red);
+    }
+    .site-nav a {
+      color: #aaa;
+      text-decoration: none;
+      padding: 10px 16px;
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color .15s, background .15s;
+    }
+    .site-nav a:hover { color: var(--white); background: rgba(255,255,255,.05); }
+    .site-nav a.active { color: var(--white); border-bottom-color: var(--red); }
+
     @media (max-width: 600px) {
       header, .controls, .table-section, .callout { padding-left: 16px; padding-right: 16px; }
       .hero { padding: 40px 16px; }
+      .site-nav { padding: 0 16px; }
     }
   </style>
 </head>
@@ -268,6 +292,16 @@
   </a>
   <span style="color:#aaa;font-size:12px;">Input Cable Specifications</span>
 </header>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="eaton-rack-pdu-g4.html">Explorer G4 Models</a>
+  <a href="eaton_pdu.html">Standard Models</a>
+  <a href="eaton_pdu_image.html">Standard Models + Images</a>
+  <a href="eaton_pdu_image - Copy.html">Standard Copy</a>
+  <a href="eaton_univ_input.html">Universal Input Cables</a>
+</nav>
+<script>document.querySelectorAll('.site-nav a').forEach(a=>{if(location.href.includes(a.getAttribute('href')))a.classList.add('active');});</script>
 
 <!-- HERO -->
 <div class="hero">
@@ -371,8 +405,8 @@
     ["CBL358-10", "IEC 532P6W",   "3-Phase",   "230/400 – 240/415V",  "30", "17.3 kVA","10 ft", "9",  "5", "IEC"],
     ["CBL360-10", "IEC 560P6W",   "3-Phase",   "240/415V",            "32A",    "23.0 kVA",       "10 ft", "8",  "5", "IEC"],
     ["CBL362-10", "IEC 360P6W",   "1-Phase",       "200–240V",            "60A",    "23.0 kVA",       "10 ft", "6",  "3", "IEC"],
-    ["CBL364-10", "CS8365",       "3-Phase Delta", "208V",                "50A",    "14.4 kVA",       "10 ft", "6",  "4", "CS"],
-    ["CBL365-10", "NEMA L15-30P", "3-Phase Delta", "208V",                "30A",    "8.6 kVA",        "10 ft", "10", "4", "NEMA"],
+    ["CBL364-10", "CS8365",       "3-Phase", "208V",                "50A",    "14.4 kVA",       "10 ft", "6",  "4", "CS"],
+    ["CBL365-10", "NEMA L15-30P", "3-Phase", "208V",                "30A",    "8.6 kVA",        "10 ft", "10", "4", "NEMA"],
   ];
 
   const TOTAL = cables.length;
